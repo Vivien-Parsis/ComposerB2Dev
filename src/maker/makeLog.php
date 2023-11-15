@@ -7,18 +7,23 @@ use Symfony\Bundle\MakerBundle\Generator as MakerBundleGenerator;
 use Symfony\Bundle\MakerBundle\InputConfiguration;
 use Symfony\Bundle\MakerBundle\Maker\AbstractMaker;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\MakerBundle\DependencyBuilder;
 
     final class makeLog extends AbstractMaker{
-        public static function getCommandName():string{return"";}
-        public static function getCommandDescription():string{return "";}
-        public function generate(InputInterface $input, ConsoleStyle $io, MakerBundleGenerator $generator)
-        {
-            $io->comment("");
+        public static function getCommandName():string{
+            return "make:log";
         }
-        public function configureCommand(\Symfony\Component\Console\Command\Command $command, InputConfiguration $inputConfig) : void{
+        public static function getCommandDescription():string{
+            return "return a maker log boilerplate";
+        }
+        public function generate(InputInterface $input, ConsoleStyle $io, MakerBundleGenerator $generator){
             
         }
-        public function configureDependencies(\Symfony\Bundle\MakerBundle\DependencyBuilder $dependencies){
+        public function configureCommand(Command $command, InputConfiguration $inputConfig) : void{
+            
+        }
+        public function configureDependencies(DependencyBuilder $dependencies){
             
         }
     } 
