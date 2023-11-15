@@ -6,12 +6,10 @@
     {
         public static function validate(string $composerPath, string $lang = 'en'): array
         {
-            // Lire le contenu du fichier composer.json
             $composerContent = json_decode(file_get_contents($composerPath), true);
             if ($composerContent === null) {
                 throw new \InvalidArgumentException('composer.json is empty or invalid JSON.');
             }
-            // Valider le nom, la description, require et version
             $nameValid = self::validateName($composerContent['name']);
             $descriptionValid = self::validateDescription($composerContent['description']);
             $requireValid = self::validateRequire($composerContent['require']);

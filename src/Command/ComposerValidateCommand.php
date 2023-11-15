@@ -3,8 +3,6 @@ namespace App\Command;
 
 use App\Validator\ComposerValidator;
 use App\Log\FooLog;
-use Monolog\Logger;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,13 +17,11 @@ use Symfony\Component\Console\Attribute\AsCommand;
 class ComposerValidateCommand extends Command
 {
     private $translator;
-    private $logger;
     
-    public function __construct(TranslatorInterface $translator, LoggerInterface $logger)
+    public function __construct(TranslatorInterface $translator)
     {
         parent::__construct();
         $this->translator = $translator;
-        $this->logger = $logger;
     }
 
     protected static $defaultName = 'composer:validate';
@@ -76,12 +72,7 @@ class ComposerValidateCommand extends Command
             $output->writeln($errorMessage);
             return Command::FAILURE;
         }
-
-        // Valider le composer.json
-        // Valider le composer.json
         $validationResults = ComposerValidator::validate($composerPath, $lang);
-        // Log les résultats de validation
-        FooLog::setLogger($this->logger);
         FooLog::logTitle($lang, 'Validation Results');
         FooLog::logMessage($lang, $langMessage[$lang]['name'] .' '. ($validationResults['name'] ? 'Valid' : 'Invalid'));
         FooLog::logMessage($lang, $langMessage[$lang]['description'] .' '. ($validationResults['description'] ? 'Valid' : 'Invalid'));
