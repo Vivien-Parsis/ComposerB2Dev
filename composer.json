@@ -1,0 +1,9 @@
+{
+    "name": "vivie/composer-b2dev",
+    "autoload": {
+        "psr-4": {
+            "Vivie\\ComposerB2dev\\": "src/"
+        }
+    },
+    "require": {}
+}
