@@ -8,10 +8,12 @@
 <body>
     <h2>Form de  validation de composer.json</h2>
     <form method="POST" action="">
-    <label for="composerJsonContent">Contenu JSON de composer.json :</label>
-        <textarea name="composerJsonContent" required></textarea><br>
+        <label for="composerJsonPath">Chemin vers composer.json :</label>
+        <input type="text" name="composerJsonPath" required><br>
+
         <label for="lang">Langue :</label>
         <input type="text" name="lang" required><br>
+
         <button type="submit">Valider</button>
     </form>
 </body>
@@ -19,14 +21,11 @@
 
 <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $composerJsonContent = $_POST['composerJsonContent'];
+        $composerJsonPath = $_POST['composerJsonPath'];
         $lang = $_POST['lang'];
-        $tempFile = tempnam("../".sys_get_temp_dir(), 'composer_json_');
-        file_put_contents($tempFile, $composerJsonContent);
         $output = [];
         $returnCode = null;
-        exec("php ../bin/console composer:validate $tempFile --lang=$lang", $output, $returnCode);
-        unlink($tempFile);
+        exec("php bin/console composer:validate $composerJsonPath --lang=$lang", $output, $returnCode);
         $result = implode("\n", $output);
         echo <<<HTML
         <pre>

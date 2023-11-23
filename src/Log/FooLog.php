@@ -21,7 +21,7 @@ class FooLog
     public static function logMessage(string $lang, string $message)
     {
         $translatedMessage = self::translate($message, $lang);
-        file_put_contents("src/Log/dev.log", self::$logtitle." : ".$translatedMessage."\n", FILE_APPEND);
+        file_put_contents("../src/log/dev.log", self::$logtitle." : ".$translatedMessage."\n", FILE_APPEND);
     }
 
     private static function translate(string $message, string $lang): string
