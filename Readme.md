@@ -1,2 +1,2 @@
-to test <br>
-symfony start:server
+to run <br>
+symfony server:start or php -S localhost:8000 -t public/
