@@ -9,9 +9,9 @@
     <h2>Form de  validation de composer.json</h2>
     <form method="POST" action="">
     <label for="composerJsonContent">Contenu JSON de composer.json :</label>
-        <textarea name="composerJsonContent" required></textarea><br>
+        <textarea id="composerJsonContent" name="composerJsonContent" required></textarea><br>
         <label for="lang">Langue :</label>
-        <select name="lang">
+        <select name="lang" id="lang">
             <option value="en">en</option>
             <option value="fr">fr</option>
             <option value="ch">ch</option>
