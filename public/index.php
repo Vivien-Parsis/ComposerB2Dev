@@ -11,7 +11,11 @@
     <label for="composerJsonContent">Contenu JSON de composer.json :</label>
         <textarea name="composerJsonContent" required></textarea><br>
         <label for="lang">Langue :</label>
-        <input type="text" name="lang" required><br>
+        <select name="lang">
+            <option value="en">en</option>
+            <option value="fr">fr</option>
+            <option value="ch">ch</option>
+        </select><br>
         <button type="submit">Valider</button>
     </form>
 </body>
@@ -28,10 +32,5 @@
         exec("php ../bin/console composer:validate $tempFile --lang=$lang", $output, $returnCode);
         unlink($tempFile);
         $result = implode("\n", $output);
-        echo <<<HTML
-        <pre>
-            {$result}
-        </pre>
-HTML;
     }
 ?>

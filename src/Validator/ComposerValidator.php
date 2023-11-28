@@ -1,6 +1,5 @@
 <?php 
     namespace App\Validator;
-    use App\Log\FooLog;
     
     class ComposerValidator
     {
