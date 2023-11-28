@@ -45,21 +45,24 @@ class ComposerValidateCommand extends Command
             'description'=>'description',
             'version'=>'version',
             'Require'=>'requise',
-            'valid'=>'valide'
+            'valid'=>'valide',
+            'invalid'=>'invalide'
         ],
         'en'=>[
             'name'=> 'name',
             'description'=>'description',
             'version'=>'version',
             'Require'=>'require',
-            'valid'=>'valid'
+            'valid'=>'valid',
+            'invalid'=>'invalid'
         ],
         'de'=>[
             'name'=> 'name',
             'description'=>'Beschreibung',
             'version'=>'Ausführung',
             'Require'=>'erfordern',
-            'valid'=>'stichhaltig'
+            'valid'=>'stichhaltig',
+            'invalid'=>'ungültig'
         ]];
 
         if (!in_array($lang, $langs)) {
@@ -74,10 +77,10 @@ class ComposerValidateCommand extends Command
         }
         $validationResults = ComposerValidator::validate($composerPath, $lang);
         FooLog::logTitle($lang, 'Validation Results');
-        FooLog::logMessage($lang, $langMessage[$lang]['name'] .' '. ($validationResults['name'] ? 'Valid' : 'Invalid'));
-        FooLog::logMessage($lang, $langMessage[$lang]['description'] .' '. ($validationResults['description'] ? 'Valid' : 'Invalid'));
-        FooLog::logMessage($lang, $langMessage[$lang]['Require'] .' '. ($validationResults['require'] ? 'Valid' : 'Invalid'));
-        FooLog::logMessage($lang, $langMessage[$lang]['version'] .' '. ($validationResults['version'] ? 'Valid' : 'Invalid'));
+        FooLog::logMessage($lang, $langMessage[$lang]['name'] .' '. ($validationResults['name'] ? $langMessage[$lang]['valid'] : $langMessage[$lang]['invalid']));
+        FooLog::logMessage($lang, $langMessage[$lang]['description'] .' '. ($validationResults['description'] ? $langMessage[$lang]['valid'] : $langMessage[$lang]['invalid']));
+        FooLog::logMessage($lang, $langMessage[$lang]['Require'] .' '. ($validationResults['require'] ? $langMessage[$lang]['valid'] : $langMessage[$lang]['invalid']));
+        FooLog::logMessage($lang, $langMessage[$lang]['version'] .' '. ($validationResults['version'] ? $langMessage[$lang]['valid'] : $langMessage[$lang]['invalid']));
 
         return Command::SUCCESS;
     }

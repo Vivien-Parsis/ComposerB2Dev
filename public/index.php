@@ -14,7 +14,7 @@
         <select name="lang" id="lang">
             <option value="en">en</option>
             <option value="fr">fr</option>
-            <option value="ch">ch</option>
+            <option value="de">de</option>
         </select><br>
         <button type="submit">Valider</button>
     </form>
