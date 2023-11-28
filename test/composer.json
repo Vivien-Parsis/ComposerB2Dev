@@ -1,0 +1,8 @@
+{
+    "name": "mon-projet",
+    "description": "Ceci est une description",
+    "require": {
+        "vendor/package": "^1.0",
+        "php": "^7.4"
+    }
+}
