@@ -7,9 +7,9 @@
 </head>
 <body>
     <h2>Form de  validation de composer.json</h2>
-    <form method="POST" action="">
-    <label for="composerJsonContent">Contenu JSON de composer.json :</label>
-        <textarea id="composerJsonContent" name="composerJsonContent" required></textarea><br>
+    <form method="POST" action="" enctype="multipart/form-data">
+    <label for="composerJson">composer.json :</label>
+        <input id="composerJson" name="composerJson" type="file" required accept=".json"><br>
         <label for="lang">Langue :</label>
         <select name="lang" id="lang">
             <option value="en">en</option>
@@ -22,15 +22,25 @@
 </html>
 
 <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $composerJsonContent = $_POST['composerJsonContent'];
-        $lang = $_POST['lang'];
-        $tempFile = tempnam("../".sys_get_temp_dir(), 'composer_json_');
-        file_put_contents($tempFile, $composerJsonContent);
-        $output = [];
-        $returnCode = null;
-        exec("php ../bin/console composer:validate $tempFile --lang=$lang", $output, $returnCode);
-        unlink($tempFile);
-        $result = implode("\n", $output);
+    function getComposer(){
+        if ($_FILES['composerJson']['error'] === UPLOAD_ERR_OK){
+            if($_FILES['composerJson']['name']!="composer.json"){
+                echo <<<HTML
+                <p>
+                    no composer.json file
+                </p>
+HTML;
+                return;
+            }
+            $composerJson = $_FILES['composerJson']['tmp_name'];
+            $lang = $_POST['lang'];
+            $output = [];
+            $returnCode = null;
+            exec("php ../bin/console composer:validate $composerJson --lang=$lang", $output, $returnCode);
+        }
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        getComposer();
     }
 ?>
