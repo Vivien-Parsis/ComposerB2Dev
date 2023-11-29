@@ -22,11 +22,11 @@
         }
     
         private static function validateName(string $name): bool{
-            return !empty($name);
+            return !trim($name)==""&&str_contains($name,"/")&&!str_contains($name," ");
         }
     
         private static function validateDescription(string $description): bool{
-            return !empty($description);
+            return !trim($description)=="";
         }
     
         private static function validateRequire(array $require): bool{
@@ -34,7 +34,7 @@
         }
     
         private static function validateVersion(string $version): bool{
-            return !empty($version);
+            return !(trim($version)==""||preg_match("/[a-z]/i", $version));
         }
     }
 ?>

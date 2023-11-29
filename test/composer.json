@@ -1,5 +1,5 @@
 {
-    "name": "mon-projet",
+    "name": "mon-projet/test",
     "description": "Ceci est une description",
     "require": {
         "vendor/package": "^1.0",
